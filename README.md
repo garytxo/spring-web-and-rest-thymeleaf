@@ -1,4 +1,4 @@
-#Spring ThymeLeaf (boostrap) and REST API
+# Spring ThymeLeaf (boostrap) and REST API
 This is a sample of how one can expose a REST API to external users and also provide a light weight admin section
 using ThymeLeaf and boostrap
 
