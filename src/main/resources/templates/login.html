@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title th:text="#{login.form.login.title}"></title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1 th:text="#{login.form.heading}"></h1>
+            <form th:action="@{/login}" method="post">
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">
+                        <label th:text="#{login.form.invalid.details}"></label>
+                    </div>
+                </div>
+                <div th:if="${param.logout}">
+                    <div class="alert alert-info">
+                        <label th:text="#{login.form.loggedOut}"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{login.form.userName}"></label>:
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           class="form-control"
+                           autofocus="autofocus"
+                           placeholder="Username"/>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{login.form.password}"></label>:
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           class="form-control"
+                           placeholder="Password"/>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <a th:href="@{/}" class="col-sm-4 btn btn-secondary" role="button">
+                                <label th:text="#{login.form.cancel}"></label>
+                            </a>
+                            <button type="submit"
+                                    name="login-submit"
+                                    id="login-submit"
+                                    class="col-sm-8 btn btn-primary">
+                                <label th:text="#{login.form.login}"></label>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

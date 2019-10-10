@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<body>
+<th:block th:fragment="header">
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}">
+                    <img th:src="@{/img/favgreen.png}" alt="logo" style="width: 30px"/>
+                </a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a th:href="@{/}"><label th:text="#{header.menu.home}"></label></a></li>
+                        <li sec:authorize="isAnonymous()"><a th:href="@{/login}"><label
+                                th:text="#{header.menu.Login}"></label></a></li>
+
+                        <li sec:authorize="isAuthenticated()" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false"><span th:text="#{header.menu.admin}"></span> <span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/admin-users}"><label th:text="#{header.menu.user}"></label></a></li>
+                                <li><a th:href="@{/sms-overview.html}"><label th:text="#{header.menu.sms}"></label></a>
+                                </li>
+                                <li><a th:href="@{/swagger-ui.html}"><label
+                                        th:text="#{header.menu.swagger}"></label></a></li>
+                            </ul>
+                        </li>
+                        <li sec:authorize="isAuthenticated()">
+                            <a th:href="@{/logout}"><label th:text="#{header.menu.Logout}"></label></a>
+                        </li>
+
+                    </ul>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{fragments/layout.html}" >
+
+<head>
+    <title th:value="#{sms.new.title}"></title>
+</head>
+
+<body>
+<div layout:fragment="content" th:remove="tag" sec:authorize="isAuthenticated()">
+
+
+    <div class="container-fluid">
+        <div class="row">
+           <h1 th:text="#{sms.new.title}"></h1>
+        </div>
+        <div class="row">
+
+            <!-- Start navigation -->
+            <nav class="col-sm-4 col-lg-2 col-md-2 hidden-xs-down bg-faded sidebar">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a th:href="@{/sms-overview.html}" class="nav-link" >
+                            <label th:text="#{sms.left.nav.option.overview}"></label>
+                        </a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a th:href="@{/sms/new-sms.html}" class="nav-link" >
+                            <label th:text="#{sms.left.nav.option.new-message}"></label>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/sms/search-sms.html}" class="nav-link" >
+                            <label th:text="#{sms.left.nav.option.search-messages}"></label>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/sms/sms-errors.html}" class="nav-link" >
+                            <label th:text="#{sms.left.nav.option.message-errors}"></label>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End navigation -->
+
+
+            <main class="col-sm-8 col-lg-10 col-md-10">
+                <h3 th:text="#{sms.new.header}"></h3>
+                <br />
+                <form action="#" th:action="@{/sms/save}" th:object="${newSMSMessageDto}"  method="post">
+
+                    <!--
+                    <div class="form-group">
+                        <label th:text="#{sms.new.form.sender}"></label>:
+                        <input type="text"
+                               id="sender"
+                               name="sender"
+                               th:field="*{sender}"
+                               class="form-control"
+                               autofocus="autofocus"
+                               placeholder="Sender" />
+
+                        <div class="alert alert-danger" role="alert"
+                              th:if="${#fields.hasErrors('sender')}" th:errors="*{sender}">
+                        </div>
+
+                    </div>
+                    -->
+
+                    <div class="form-group">
+                        <label th:text="#{sms.new.form.receiver}"></label>:
+                        <input type="text"
+                               id="receiver"
+                               name="receiver"
+                               th:field="*{receiver}"
+                               class="form-control"
+                               placeholder="Receiver" />
+                        <div class="alert alert-danger" role="alert"
+                             th:if="${#fields.hasErrors('receiver')}" th:errors="*{receiver}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label th:text="#{sms.new.form.send}"></label>:
+                        <div class="input-group date" id="sendOn" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#sendOn"
+                                   th:field="*{sendOn}" placeholder="Send On"  readonly />
+                            <span class="input-group-addon" data-target="#sendOn" data-toggle="datetimepicker">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+
+                            <div class="alert alert-danger" role="alert"
+                                 th:if="${#fields.hasErrors('sendOn')}" th:errors="*{sendOn}">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label th:text="#{sms.new.form.message}"></label>:
+                        <textarea
+                                id="message"
+                                name="message"
+                                th:field="*{message}"
+                                class="form-control"
+                                rows="3">
+                        </textarea>
+                        <div class="alert alert-danger" role="alert"
+                             th:if="${#fields.hasErrors('message')}" th:errors="*{message}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit"
+                                name="login-submit"
+                                id="login-submit"
+                                class="btn btn-primary" onclick="this.form.submit();">
+                            <label th:text="#{sms.new.form.save}"></label>
+                        </button>
+                    </div>
+                </form>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+</div>
+<th:block layout:fragment="script">
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+
+        $(function () {
+
+            $('#sendOn').datetimepicker({
+                format: 'L',
+                minDate:moment(),
+                ignoreReadonly:true
+            });
+        });
+
+        /*]]>*/
+    </script>
+</th:block>
+</body>
+</html>

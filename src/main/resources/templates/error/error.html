@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Opps, what happened</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <h1>Opps, something went wrong</h1>
+    <p th:text="${message}"> </p>
+    <p th:text="${exception}"> </p>
+    <p><a href="/" th:href="@{/}">Back to home page</a></p>
+</div>
+</body>
+</html>

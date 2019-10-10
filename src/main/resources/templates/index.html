@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{fragments/layout.html}" >
+
+<head>
+    <title th:value="#{index.title}"></title>
+</head>
+
+<body>
+
+
+<div layout:fragment="content" th:remove="tag">
+
+    <div class="jumbotron" sec:authorize="isAuthenticated()">
+        <h3 th:text="#{index.secure.welcome(${username})}"></h3>
+        <p th:text="'This date example  ' + ${#dates.format(datetime, 'dd MMM yyyy HH:mm')}"></p>
+        <p> To be completed!!!!!</p>
+
+    </div>
+
+    <div  class="jumbotron" sec:authorize="isAnonymous()"  >
+        <h3 th:text="#{index.welcome}"></h3>
+
+        <p th:text="#{index.login.please}"></p>
+        <p>
+            <a class="btn btn-lg btn-primary" href="@{/login}" role="button">
+                <label th:text="#{index.login.login.button}"></label>
+            </a>
+        </p>
+    </div>
+
+</div>
+
+
+</body>
+</html>

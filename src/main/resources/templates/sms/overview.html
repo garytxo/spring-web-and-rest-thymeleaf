@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{fragments/layout.html}" >
+
+<head>
+    <title th:value="#{sms.overview.title}"></title>
+</head>
+
+<body>
+<div layout:fragment="content" th:remove="tag" sec:authorize="isAuthenticated()">
+
+
+    <div class="container-fluid">
+        <div class="row">
+           <h1 th:text="#{sms.overview.header}"></h1>
+        </div>
+        <div class="row">
+
+            <!-- Start navigation -->
+            <nav class="col-sm-4 col-lg-2 col-md-2 hidden-xs-down bg-faded sidebar">
+
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item active">
+                        <a th:href="@{/sms-overview.html}" class="nav-link" >
+                            <label th:text="#{sms.left.nav.option.overview}"></label>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/sms/new-sms.html}" class="nav-link" >
+                            <label th:text="#{sms.left.nav.option.new-message}"></label>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/sms/search-sms.html}" class="nav-link" >
+                            <label th:text="#{sms.left.nav.option.search-messages}"></label>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/sms/sms-errors.html}" class="nav-link" >
+                            <label th:text="#{sms.left.nav.option.message-errors}"></label>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End navigation -->
+
+
+
+            <main class="col-sm-8 col-lg-10 col-md-10">
+                <h3 th:text="#{sms.overview.message.summary}"></h3>
+                <div class="table-responsive" th:if="${results.totalElements gt 0}">
+
+                    <h4 th:text="#{sms.overview.found.message(${results.totalElements})}"></h4>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+
+                            <th th:text="#{admin.sms.table.header.createdOn}"></th>
+                            <th th:text="#{admin.sms.table.header.sender}"></th>
+                            <th th:text="#{admin.sms.table.header.receiver}"></th>
+                            <th th:text="#{admin.sms.table.header.status}"></th>
+                            <th th:text="#{admin.sms.table.header.sentOn}"></th>
+                            <th th:text="#{admin.sms.table.header.message}"></th>
+                            <th th:text="#{admin.sms.table.header.actions}"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="message : ${results.messages}">
+                            <td th:text="${#temporals.format(message.createdOn, 'MM-dd-yyyy HH:mm')}"></td>
+                            <td th:text="${message.sender}"></td>
+                            <td th:text="${message.receiver}"></td>
+                            <td th:text="${message.status}"></td>
+                            <td th:text="${message.sendOn}"></td>
+                            <td>
+                                <span th:text="${message.message}" th:classappend="message-cut"></span>
+                            </td>
+                            <td>
+                                <div class="input-group-btn">
+
+
+                                    <a th:href="@{/sms-edit/{id}(id=${message.id})}" class="btn">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    </a>
+
+                                    <a sec:authorize="hasRole('ROLE_ADMIN')" data-toggle="modal" class="btn" data-target="#modal-warning" th:attr="data-target='#modal-warning'+${message.id}">
+                                        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                                    </a>
+
+
+
+                                </div>
+                            </td>
+
+                            <!-- modal delete -->
+                            <div class="modal fade in" th:id="modal-warning+${message.id}" >
+                                <div class="modal-dialog">
+                                    <div class="modal-content alert-danger">
+                                        <div class="modal-header bg-danger">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span></button>
+                                            <h5 class="modal-title" th:text="#{sms.overview.delete.model.header}"></h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p th:text="#{sms.overview.delete.model.body}"></p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+
+                                            <a th:href="@{/sms-delete/{id}(id=${message.id})}" class="btn btn-danger">
+                                                <i class="fa fa-check"></i>&nbsp;Yes
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                    <!-- pagination -->
+                    <nav aria-label="Page navigation" th:if="${results.totalPages gt 0}">
+                        <ul class="pager">
+                            <li class="previous"th:classappend="${results.pageNumber eq 0} ? 'disabled'">
+
+                                <a class="page-link" th:href="@{/sms-overview.html?page={id}(id=${results.pageNumber - 1})}">
+                                    <span aria-hidden="true">&larr;</span> Prev
+                                </a>
+                            </li>
+                            <li class="next" th:classappend="${results.pageNumber + 1 eq results.totalPages} ? 'disabled'">
+
+                                <a class="page-link" th:href="@{/sms-overview.html?page={id}(id=${results.pageNumber + 2})}">
+                                   Next <span aria-hidden="true">&rarr;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- pagination end -->
+                </div>
+            </main>
+
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+</html>

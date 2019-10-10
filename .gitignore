@@ -1,0 +1,25 @@
+# OS generated files #
+######################
+comms*
+target/
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+spring-shell.log
+.idea/**
+.idea/artifacts/
+.idea/axpm.iml
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/libraries/
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+.gradle/**
+build/**
+gradle/**
+
