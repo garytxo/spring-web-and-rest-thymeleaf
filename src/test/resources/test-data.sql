@@ -29,8 +29,8 @@ values (11,2);
 insert into bandwidth_credentials (id,version, created_by, created_date, last_modified_by, last_modified_date,
 message_api, message_secret,application_name ,application_id, sender_phone_number,dashboard_user_name, dashboard_pwd,
 dashboard_account_id,dashboard_sub_account_id)
-values (2,1, 10,now(), 10, now(),'83baba800d9cf9e1e8811fc527ee7aaea0f03a671265ce2a','fe537df3e6c6f1433247775147014fe3e91dab34d1a471a7','test-location-application','e5bca7db-1158-40a3-8b74-35f846e8b549',5012141397,
-'gfinchdev','G!1juf5T','5004987','24402');
+values (2,1, 10,now(), 10, now(),'832222a800d9cf9e1e8811fc527ee7aaea0f03a671265ce2a','fe227df3e6c6f1433247775147014fe3e91dab34d1a471a7','test-location-application','e5bca7db-123-40a3-8b74-35f846e8b549',217823123,
+'username','password','23213123','123123');
 
 insert into bandwidth_credentials (id,version, created_by, created_date, last_modified_by, last_modified_date,
 message_api, message_secret,application_name ,application_id, sender_phone_number,dashboard_user_name, dashboard_pwd,

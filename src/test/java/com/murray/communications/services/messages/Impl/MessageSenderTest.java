@@ -35,15 +35,15 @@ public class MessageSenderTest {
 
         BandWidthCredentials bandWidthCredentials = new BandWidthCredentials();
         bandWidthCredentials.setId(11L);
-        bandWidthCredentials.setMessageApi("83baba800d9cf9e1e8811fc527ee7aaea0f03a671265ce2a");
-        bandWidthCredentials.setMessageSecret("fe537df3e6c6f1433247775147014fe3e91dab34d1a471a7");
+        bandWidthCredentials.setMessageApi("83babaASs9cf9e1e8811fc527ee7aaea0f03a671265ce2a");
+        bandWidthCredentials.setMessageSecret("fe537dasas33247775147014fe3e91dab34d1a471a7");
         bandWidthCredentials.setApplicationName("test-location-application");
-        bandWidthCredentials.setSenderPhoneNumber(5012141397L);
+        bandWidthCredentials.setSenderPhoneNumber(123123213L);
         bandWidthCredentials.setApplicationId("e5bca7db-1158-40a3-8b74-35f846e8b549");
-        bandWidthCredentials.setDashboardUserName("gfinchdev");
-        bandWidthCredentials.setDashboardPwd("G!1juf5T");
-        bandWidthCredentials.setDashboardAccountId("5004987");
-        bandWidthCredentials.setDashboardSubAccountId("24402");
+        bandWidthCredentials.setDashboardUserName("userName");
+        bandWidthCredentials.setDashboardPwd("Gpwd");
+        bandWidthCredentials.setDashboardAccountId("22313");
+        bandWidthCredentials.setDashboardSubAccountId("22202");
 
         message.setBandWidthCredentials(bandWidthCredentials);
 
