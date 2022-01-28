@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<jackson.version>2.9.10.7</jackson.version>
+		<jackson.version>2.9.10.8</jackson.version>
 		<swagger.verion>2.9.2</swagger.verion>
 		<thymeleaf.dialect.verion>2.4.1</thymeleaf.dialect.verion>
 		<jjwt.verion>0.9.1</jjwt.verion>
